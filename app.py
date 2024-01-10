@@ -3,19 +3,14 @@ import requests, os
 
 app = Flask(__name__)
 
-gh_token = os.environ["GH_TOKEN"]
+#gh_token = os.environ["GH_TOKEN"]
 url = "https://api.github.com/users"
-headers = {
-    "X-GitHub-Api-Version": "2022-11-28",
-    "Authorization": f"Bearer {gh_token}",
-    "Accept": "application/vnd.github+json",
-}
 
 
 # Validates request url, catch HTTP error if any.
 def validate_request(user):
     try:
-        r = requests.get(f"{url}/{user}/gists", headers)
+        r = requests.get(f"{url}/{user}/gists")
         r.raise_for_status()
     except requests.exceptions.HTTPError as err:
         print("HTTP Error")
