@@ -37,4 +37,6 @@ jobs:
       - name: run k8
         run: |
           sed -e "s/TAG/${GITHUB_SHA}/g" deploy.yml > deploy.yml
+          ls
+          cat deploy.yml
           kubectl apply -f deploy.yml
