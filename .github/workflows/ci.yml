@@ -27,3 +27,14 @@ jobs:
 
       - name: build docker image
         run: docker build -t myapp:${GITHUB_SHA} .
+
+  deploy:
+    needs: [build]
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: run k8
+        run: |
+        sed -i 's/TAG/${GITHUB_SHA}/' deploy.yml
+        kubectl apply -f  deploy.yml
