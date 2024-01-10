@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
       - name: run k8
         run: |
-          sed -e "s/TAG/${GITHUB_SHA}/g" deploy.yml > deploy.yml
+          sed -e "s/TAG/${GITHUB_SHA}/g" deploy.yml | kubectl apply -f -
           ls
           cat deploy.yml
-          kubectl apply -f deploy.yml
+
